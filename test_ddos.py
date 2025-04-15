@@ -1,6 +1,7 @@
 import requests
 import multiprocessing
 
+#example of malware requests to custom local local server
 def send_request():
     url = "http://localhost:8000/qrqr.html"
  # Adjust to your local server URL
