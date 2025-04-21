@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ChatBot Web</title>
+</head>
+<body>
+    <h2>Web ChatBot</h2>
+    <div id="chat-box"></div>
+    <input type="text" id="input-box" placeholder="Type a message..." />
+    <button onclick="send()">Send</button>
+
+    <script>
+        function send() {
+            let input = document.getElementById("input-box").value;
+            fetch("/ask", {
+                method: "POST",
+                headers: {"Content-Type": "application/x-www-form-urlencoded"},
+                body: `message=${input}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("chat-box").innerHTML += `<p><b>You:</b> ${input}</p>`;
+                document.getElementById("chat-box").innerHTML += `<p><b>Bot:</b> ${data.reply}</p>`;
+                document.getElementById("input-box").value = "";
+            });
+        }
+    </script>
+</body>
+</html>
